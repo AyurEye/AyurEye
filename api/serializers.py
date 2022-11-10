@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from users.models import User
+from users.models import User, UserProfile
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -38,3 +38,26 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        exclude = ('phone_regex', 'is_verified')
+        extra_kwargs = {
+            'license_photo': {'required': False},
+            'hospital_name': {'required': False},
+        }
+
+    def validate(self, data):
+        data_dict = dict(data)
+        data_keys = data.keys()
+        account_type = data_dict.get('user_type')
+        if account_type == 'Dr' and 'license_photo' not in data_keys:
+            raise serializers.ValidationError('License photo required to submit form as Doctor.')
+        if account_type == 'Dr' and 'hospital_name' not in data_keys:
+            raise serializers.ValidationError('Hospital name required to submit form as Doctor.')
+        return data
+
+    def create(self, validated_data):
+        return UserProfile(**validated_data)
+
