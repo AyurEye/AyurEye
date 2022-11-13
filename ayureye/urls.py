@@ -17,7 +17,27 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib import admin
 
+
+from rest_framework.schemas import get_schema_view
+from django.urls import path
+
+schema_view = get_schema_view(title="Example API")
+from rest_framework_simplejwt import views as jwt_views
+from api.views import GoogleLogin
+
+
 urlpatterns = [
-    path(r'admin/', admin.site.urls),
-    path('api/', include('api.urls'))
+    path('api/ ', include('api.urls')),
+
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('schema', schema_view),
+    path('admin/', admin.site.urls),
+    path('auth/', include('rest_auth.urls')) ,
+    path('social-login/google/', GoogleLogin.as_view(), name='google_login'),
+
 ]
+
+
+

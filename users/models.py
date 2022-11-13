@@ -68,6 +68,10 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=25)
     hospital_name = models.CharField(max_length=30, blank=True, null=True)
 
+class Images(models.Model):
+    x_ray = models.ImageField(upload_to='media/', blank=True, null=True)
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='patient_xray')
+    doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name="doctor_examining")
 
 
 
