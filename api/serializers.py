@@ -2,11 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-<<<<<<< HEAD
-from users.models import User, UserProfile
-=======
 from users.models import UserProfile, Images
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -33,15 +29,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-<<<<<<< HEAD
-class UserProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserProfile
-        exclude = ('phone_regex', 'is_verified')
-        extra_kwargs = {
-            'license_photo': {'required': False},
-            'hospital_name': {'required': False},
-=======
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,7 +41,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'contact_number': {'required': True},
             'country': {'required': True},
             'city': {'required': True},
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54
         }
 
     def validate(self, data):
@@ -65,18 +51,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('License photo required to submit form as Doctor.')
         if account_type == 'Dr' and 'hospital_name' not in data_keys:
             raise serializers.ValidationError('Hospital name required to submit form as Doctor.')
-<<<<<<< HEAD
-=======
+
         if account_type == 'Pt' and 'license_photo' in data_keys:
             raise serializers.ValidationError('Patients cannot have liscence photo')
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54
         return data
 
     def create(self, validated_data):
         return UserProfile(**validated_data)
 
-<<<<<<< HEAD
-=======
 
 class GeneralTokenObtainSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -110,4 +92,3 @@ class XrayImages(serializers.ModelSerializer):
         # data['xray_id']= data.id
         # data['xray_path']: data.x_ray
         return data
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54

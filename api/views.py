@@ -16,9 +16,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # from rest_auth.registration.views import SocialLoginView
 # from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 
-<<<<<<< HEAD
-from api.serializers import RegisterUserSerializer, UserProfileSerializer
-=======
+
 from api.serializers import RegisterUserSerializer, UserProfileSerializer, GeneralTokenObtainSerializer, XrayImages
 from users.models import  UserProfile, Images
 from api.permissions import DoctorPermission, PatientPermission
@@ -28,7 +26,6 @@ from api.permissions import DoctorPermission, PatientPermission
 #     adapter_class = GoogleOAuth2Adapter
 #     callback_url = "http://localhost:3000"
 #     client_class = OAuth2Client
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54
 
 @api_view(['POST'])
 def registration_view(request):
@@ -45,12 +42,6 @@ def registration_view(request):
         data = serializer.errors
     return Response(data)
 
-<<<<<<< HEAD
-
-@api_view(['POST'])
-def profile_view(request):
-    pass
-=======
 class LoginView(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = GeneralTokenObtainSerializer
@@ -118,4 +109,3 @@ class XrayDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response("Cannot Delete by Patient or unverified Doctor")
->>>>>>> 9074060ab346af9be6dca56762f7741b3491eb54
