@@ -62,7 +62,6 @@ class XrayPatient(APIView):
 
 
 class XrayDoctor(APIView):
-
     permission_classes = (IsAuthenticated, DoctorPermission,)
     def get(self, request, format=None):
         images = Images.objects.filter(doctor=request.user.id)
@@ -83,6 +82,7 @@ class XrayDoctor(APIView):
             data['xray_id'] = image.id
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class XrayDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
@@ -108,3 +108,16 @@ class XrayDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response("Cannot Delete by Patient or unverified Doctor")
+
+class PatientDetail(APIView):
+    permission_classes = (IsAuthenticated, DoctorPermission)
+
+    def get_object(self):
+        try:
+            return UserProfile.objects.filter(user_type="Pt") 
+        except DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        serializer = UserProfileSerializer(self.get_object(),many=True)
+        return Response(serializer.data)
