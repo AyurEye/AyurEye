@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User
+from users.models import UserProfile, Images
 from django.utils.translation import gettext_lazy as _
 
 
@@ -38,4 +38,5 @@ class AyurEyeUserAdmin(UserAdmin):
     ordering = ("email",)
 
 
-admin.site.register(User, AyurEyeUserAdmin)
+admin.site.register(UserProfile)
+admin.site.register(Images)
