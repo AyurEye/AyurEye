@@ -2,3 +2,9 @@ env/
 .idea/
 .DS_Store
 db.sqlite3
+*.h5
+*.png
+*.jpg
+*.jpeg
+*.jfif
+*.gif
