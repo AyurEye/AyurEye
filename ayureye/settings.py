@@ -52,7 +52,8 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
-    'drf_yasg'
+    'drf_yasg',
+    'prediction_api',
 ]
 
 MIDDLEWARE = [
