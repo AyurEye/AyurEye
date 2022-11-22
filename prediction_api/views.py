@@ -13,6 +13,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
+from django.views.decorators.csrf import csrf_exempt
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 model_path = os.path.join(BASE_DIR, 'models/tb_diagnosis_model.h5')
 
@@ -58,9 +60,9 @@ def predict(model, image):
 
     if confidence > 100:
         confidence = 100
-    if confidence >= 40:
+    if confidence >= 20:
         confidence_remarks = "Confidence: {} %".format(confidence)
-    elif confidence < 40:
+    elif confidence < 20:
         confidence_remarks = "Confidence: {}%, Not confident about the image".format(
             confidence)
         label = " "
@@ -73,14 +75,18 @@ def upload_image(request):
     f = request.FILES['image']
     fs = FileSystemStorage()
     filePathName = fs.save(f.name, f)
+    print(filePathName)
     filePathName = fs.url(filePathName)
+    print(filePathName)
     testimage = '.'+filePathName, f
-
-    return testimage, filePathName
+    print(testimage)
+    return testimage
 
 
 def predictImage(testimage, filePathName):
-    from keras.preprocessing.image import img_to_array, load_img
+    # from keras.preprocessing.image import load_img
+    from tensorflow.keras.utils import img_to_array, load_img
+
     image_width = 512
     image_height = 512
 
@@ -92,12 +98,14 @@ def predictImage(testimage, filePathName):
     return label, remarks, confidence
 
 
-class Image(APIView):
+@csrf_exempt
+@api_view(['POST'])
+def Image(request):
 
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
-    def post(self, request, *args, **kwargs):
-        testimage, filePathName = upload_image(request=request)
+    if request.method == 'POST':
+        (testimage, filePathName) = upload_image(request=request)
         label, remarks, confidence = predictImage(testimage, filePathName)
         response_data = {"label" : label,
                          "remarks" : remarks,

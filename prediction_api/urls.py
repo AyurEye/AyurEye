@@ -4,5 +4,5 @@ from prediction_api.views import Image
 
 
 urlpatterns = [
-    url(r'^image/$', Image.as_view(), name='upload-image'),
+    url(r'^image/$', Image, name='upload-image'),
 ]
