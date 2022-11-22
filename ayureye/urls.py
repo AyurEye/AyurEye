@@ -27,6 +27,7 @@ from rest_framework_simplejwt import views as jwt_views
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+
 schema_view = get_schema_view(
     openapi.Info(
         #  add your swagger doc title
@@ -42,7 +43,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('api/', include('api.urls')),
-
+    path('prediction_api/', admin.site.urls),
 
     # path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
