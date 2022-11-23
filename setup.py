@@ -20,6 +20,9 @@ import gdown
 
 base = os.path.dirname(os.path.realpath(__file__))
 
+if not os.path.exists(os.path.join(base,'models/')):
+    os.makedirs(os.path.join(base,'models'))
+
 ## Download TB diagnosis model
 print("Downloading TB diagnosis model:")
 url1 = 'https://drive.google.com/uc?id=1prDcwVc7nIPKQC6NZgYWaQGDPvTY-XR0'
