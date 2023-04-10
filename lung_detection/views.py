@@ -55,6 +55,8 @@ class XrayView(APIView):
             if image.disease_detected:
                 data['prediction_parameter'] = image.prediction_parameter
                 # data['prediction_image'] = image.prediction_image.path
+            else:
+                data['status'] = "Healthy person"
 
 
             return Response(data, status=status.HTTP_201_CREATED)
