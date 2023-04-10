@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
     'drf_yasg',
-    'prediction_api',
+    'lung_detection',
+    # 'prediction_api',
 ]
 
 MIDDLEWARE = [
