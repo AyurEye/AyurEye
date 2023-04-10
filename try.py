@@ -13,17 +13,12 @@ preds = model.predict("test3.jpg", confidence=40, overlap=30)
 # print(preds)
 
 detections = preds.json()['predictions']# visualize your prediction
-dict={}
+
 if detections ==[]:
     print("No disease")
 
 else:
-    print(detections[0])
-    print(type(detections[0]))
-    next((item for item in detections), None)
-    dict.
-
-
-
+    print(detections)
+    
 # visualize your prediction
 preds.save("prediction.jpg")

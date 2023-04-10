@@ -38,14 +38,14 @@ class XrayView(APIView):
             image= serializer.save()
 
             preds = model.predict(image.x_ray.path, confidence=40, overlap=30)
-            # media_url = settings.MEDIA_ROOT + settings.MEDIA_URL
+            media_url = settings.MEDIA_ROOT + settings.MEDIA_URL
             detections = (preds.json()['predictions'])
             x = False if detections ==[] else True
             # addition = {'prediction_parameter':detections, 'disease_detected':x, 'prediction_image':preds.save(f"prediction{image.id}.jpg")}
             image.prediction_parameter=detections
             image.disease_detected=x
-            # preds.save(f"{media_url}/prediction{image.id}.jpg")
-            # image.prediction_image.path = f"{media_url}/prediction{image.id}.jpg"
+            preds.save(f"{media_url}/prediction{image.id}.jpg")
+            image.prediction_image= f"{media_url}prediction{image.id}.jpg"
             image.save()
 
             data['response'] = "Successfully submitted image"
@@ -54,7 +54,7 @@ class XrayView(APIView):
             data['disease_detected'] = image.disease_detected
             if image.disease_detected:
                 data['prediction_parameter'] = image.prediction_parameter
-                # data['prediction_image'] = image.prediction_image.path
+                data['prediction_image'] = image.prediction_image
             else:
                 data['status'] = "Healthy person"
 
