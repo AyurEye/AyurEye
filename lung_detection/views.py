@@ -45,11 +45,11 @@ class XrayView(APIView):
             image.prediction_parameter=detections
             image.disease_detected=x
             preds.save(f"{media_url}/prediction{image.id}.jpg")
-            image.prediction_image= f"{media_url}prediction{image.id}.jpg"
+            image.prediction_image= f"{settings.MEDIA_URL}prediction{image.id}.jpg"
             image.save()
 
             data['response'] = "Successfully submitted image"
-            data['xray_path'] = image.x_ray.path
+            data['xray_path'] = image.x_ray.url
             data['xray_id'] = image.id
             data['disease_detected'] = image.disease_detected
             if image.disease_detected:
