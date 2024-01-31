@@ -6,22 +6,24 @@ We conducted experiments on the TBX11K dataset, a publicly available dataset, wh
 
 Our CAD system not only advances diagnostic accuracy but also contributes to mitigating TB transmission risks. The ability to handle class imbalance underscores its potential for real-world TB detection applications.
 
+Find Research Paper at https://www.mdpi.com/2078-2489/14/12/655
+
 ---
 
 ## Repository Contents
 
 1. **Code:** Contains the source code for the CAD system implementation.
 2. **Documentation:** Includes detailed documentation on system architecture, usage instructions, and dataset information.
-4. **Data:** Contains the TBX11K dataset used for training and evaluation.
-5. **Results:** Includes evaluation metrics, graphs, and visualizations showcasing the performance of the CAD system.
-6. **References:** Lists relevant research papers, articles, and resources.
+3. **Data:** Contains the TBX11K dataset used for training and evaluation.
+4. **Results:** Includes evaluation metrics, graphs, and visualizations showcasing the performance of the CAD system.
+5. **References:** Lists relevant research papers, articles, and resources.
 
 ---
 
 ## Installation
 
 ### Clone repository
- - git clone git@github.com:AyurEye/AyurEye.git
+ - git clone https://github.com/AyurEye/AyurEye.git
 
 ### Create Virtual environment
  - python -m venv env
@@ -55,14 +57,6 @@ This project is licensed under the [Creative Commons Attribution-NonCommercial-N
 Please review the license terms before using or reproducing any part of this project.
 
 ---
-
-
-## Acknowledgments
-
-We acknowledge the contributors to the TBX11K dataset and the open-source community for their invaluable support and resources.
-
----
-
 ## Contact
 
-For any inquiries or feedback, please contact [anuragtimilsina@gmail.com]
+For any inquiries or feedback, please contact [anurag.timilsina@gmail.com]
