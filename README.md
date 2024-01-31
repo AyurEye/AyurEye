@@ -48,7 +48,7 @@ After conducting our comprehensive experiments with image weights assignment, mi
 ![Precision–recall curve for the model](https://www.mdpi.com/information/information-14-00655/article_deploy/html/images/information-14-00655-g014.png)
 
 ## Screenshots
-![Screenshots](media/screenshots.png)
+![Screenshots](media/screenshot.png)
 
 ## License
 
